@@ -71,17 +71,3 @@ def logged_in():
     if 'username' in session: return True
     return False
     
-@app.route('/add_comment', methods=['GET', 'POST'])
-def add_comment():
-    if request.method == 'POST':
-        # store request.form['comment'] in database
-        write_db(request.form['comment'])
-        return redirect(url_for('index'))
-    if logged_in():
-        return '''
-        <form method="post">
-            <p><textarea name=comment rows="10" cols="80"></textarea>
-            <p><input type=submit value=AddComment>
-        </form>
-        '''
-
